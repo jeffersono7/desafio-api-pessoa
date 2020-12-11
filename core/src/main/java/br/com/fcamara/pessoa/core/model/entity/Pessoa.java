@@ -1,0 +1,61 @@
+package br.com.fcamara.pessoa.core.model.entity;
+
+import lombok.*;
+import org.hibernate.validator.constraints.br.CPF;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "pessoa")
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class Pessoa implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", columnDefinition = "serial", nullable = false)
+    private Long id;
+
+    @NotEmpty
+    @Max(300)
+    @Column(name = "nome", columnDefinition = "varchar(300)", nullable = false)
+    private String nome;
+
+    @NotEmpty
+    @CPF
+    @Column(name = "cpf", columnDefinition = "varchar(11)", nullable = false, unique = true)
+    private String cpf;
+
+    @Past
+    @NotNull
+    @Column(name = "data_nascimento", columnDefinition = "timestamp", nullable = false)
+    private LocalDate dataNascimento;
+
+    @NotEmpty
+    @Column(name = "pais_nascimento", columnDefinition = "varchar(200)", nullable = false)
+    private String paisNascimento;
+
+    @NotEmpty
+    @Column(name = "estado_nascimento", columnDefinition = "varchar(2)", nullable = false)
+    private String estadoNascimento;
+
+    @NotEmpty
+    @Column(name = "cidade_nascimento", columnDefinition = "varchar(50)", nullable = false)
+    private String cidadeNascimento;
+
+    @Column(name = "nome_pai", columnDefinition = "varchar(300)")
+    private String nomePai;
+
+    @Column(name = "nome_mae", columnDefinition = "varchar(300)")
+    private String nomeMae;
+
+    @NotEmpty
+    @Email
+    @Column(name = "email", columnDefinition = "varchar(400)", nullable = false)
+    private String email;
+}
