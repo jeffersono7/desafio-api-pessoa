@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: pessoa
+  datasource:
+    url: "@flyway.url@"
+    username: "@flyway.user@"
+    password: "@flyway.password@"
+  flyway:
+    enabled: false
+    default-schema: "@flyway.schemas@"
+
+server:
+  servlet:
+    context-path: /api
+
+basePath: /api

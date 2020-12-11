@@ -1,0 +1,11 @@
+
+${AnsiColor.BLUE} ______  ${AnsiColor.CYAN}
+${AnsiColor.BLUE}(_____ \ ${AnsiColor.CYAN}
+${AnsiColor.BLUE} _____) )${AnsiColor.CYAN}  ____   ___   ___   ___    ____
+${AnsiColor.BLUE}|  ____/ ${AnsiColor.CYAN} / _  ) /___) /___) / _ \  / _  |
+${AnsiColor.BLUE}| |      ${AnsiColor.CYAN}( (/ / |___ ||___ || |_| |( ( | |
+${AnsiColor.BLUE}|_|      ${AnsiColor.CYAN} \____)(___/ (___/  \___/  \_||_|
+
+${AnsiColor.WHITE}:: ${AnsiColor.GREEN}Spring Boot${AnsiColor.WHITE} :: ${spring-boot.formatted-version}
+${AnsiColor.WHITE}:: ${AnsiColor.GREEN}Title       ${AnsiColor.WHITE}:: ${application.title}
+${AnsiColor.WHITE}:: ${AnsiColor.GREEN}Version     ${AnsiColor.WHITE}:: ${application.version}

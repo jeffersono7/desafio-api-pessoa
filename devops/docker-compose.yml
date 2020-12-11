@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+  postgres:
+    container_name: postgres-pessoa
+    image: postgres
+    restart: on-failure
+    environment:
+      POSTGRES_USER: pessoa
+      POSTGRES_PASSWORD: pessoa
+      POSTGRES_DB: pessoa
+    ports:
+      - '5432:5432'
