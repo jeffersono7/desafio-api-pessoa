@@ -24,6 +24,6 @@ public class PessoaRestController implements PessoaRest {
                 .map(pessoaMapper::toEntity)
                 .map(pessoaService::criar)
                 .map(pessoaMapper::toDto)
-        .orElseThrow(InternalServerException.supplier());
+        .orElseThrow(InternalServerException.supplier()); // TODO por motivo
     }
 }
