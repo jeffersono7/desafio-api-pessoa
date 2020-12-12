@@ -20,6 +20,8 @@ import javax.validation.Valid;
 )
 public interface PessoaRest {
 
+    String PATH = "/v1/pessoas";
+
     @ApiOperation("Criar pessoa")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
