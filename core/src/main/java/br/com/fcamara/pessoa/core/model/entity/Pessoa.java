@@ -1,14 +1,21 @@
 package br.com.fcamara.pessoa.core.model.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "pessoa")
 @Getter
 @Builder
@@ -58,4 +65,12 @@ public class Pessoa {
     @Email
     @Column(name = "email", columnDefinition = "varchar(400)", nullable = false)
     private String email;
+
+    @Column(name = "created_at", columnDefinition = "timestamp", nullable = false)
+    @CreatedDate
+    private LocalDate createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "timestamp", nullable = false)
+    @LastModifiedDate
+    private LocalDate updatedAt;
 }

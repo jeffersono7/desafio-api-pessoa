@@ -11,5 +11,7 @@ CREATE TABLE ${schema}.pessoa (
     nome_pai varchar(300),
     nome_mae varchar(300),
     email varchar(400) not null,
+    created_at timestamp not null default current_timestamp,
+    updated_at timestamp not null default current_timestamp,
     primary key(id)
 )

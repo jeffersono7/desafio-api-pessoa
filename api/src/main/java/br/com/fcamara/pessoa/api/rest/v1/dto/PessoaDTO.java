@@ -56,4 +56,10 @@ public class PessoaDTO implements Serializable {
     @NotEmpty
     @Email
     private String email;
+
+    @ApiModelProperty(name = "Data de criação da pessoa")
+    private LocalDate createdAt;
+
+    @ApiModelProperty(name = "Data da última modificação da pessoa")
+    private LocalDate updatedAt;
 }
