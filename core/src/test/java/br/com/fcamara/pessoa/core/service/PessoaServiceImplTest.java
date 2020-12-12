@@ -1,8 +1,10 @@
 package br.com.fcamara.pessoa.core.service;
 
+import br.com.fcamara.pessoa.core.exception.BusinessException;
 import br.com.fcamara.pessoa.core.model.entity.Pessoa;
 import br.com.fcamara.pessoa.core.ports.driven.PessoaRepository;
 import br.com.fcamara.pessoa.core.support.TestSupport;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +23,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -42,6 +45,7 @@ class PessoaServiceImplTest extends TestSupport {
     @Test
     public void quandoParametrosValidosDeveSalvarPessoa() {
         var pessoa = criarPessoa();
+        when(pessoaRepository.isCpfExiste(anyString())).thenReturn(Boolean.FALSE);
         when(pessoaRepository.salvar(any(Pessoa.class)))
                 .thenReturn(mockPessoaSalva(pessoa));
 
@@ -59,6 +63,20 @@ class PessoaServiceImplTest extends TestSupport {
         assertEquals(pessoa.getNomeMae(), result.getNomeMae());
         assertEquals(pessoa.getNomePai(), result.getNomePai());
         assertEquals(pessoa.getPaisNascimento(), result.getPaisNascimento());
+    }
+
+    @Test
+    public void quandoCpfJaExistirDeveLancarErro() {
+        var pessoa = criarPessoa();
+
+        when(pessoaRepository.isCpfExiste(anyString())).thenReturn(Boolean.TRUE);
+
+        try{
+            pessoaService.criar(pessoa);
+
+            Assert.fail("Deve lancar error quando CPF já estiver cadastrado!");
+        } catch (BusinessException e) {
+        }
     }
 
     private Pessoa mockPessoaSalva(Pessoa pessoa) {

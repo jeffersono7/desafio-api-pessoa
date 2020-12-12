@@ -5,4 +5,6 @@ import br.com.fcamara.pessoa.core.model.entity.Pessoa;
 public interface PessoaRepository {
 
     Pessoa salvar(Pessoa pessoa);
+
+    Boolean isCpfExiste(String cpf);
 }

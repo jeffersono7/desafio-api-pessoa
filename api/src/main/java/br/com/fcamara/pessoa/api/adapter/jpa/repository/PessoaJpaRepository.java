@@ -8,8 +8,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PessoaJpaRepository extends PessoaRepository, JpaRepository<Pessoa, Long> {
 
+    Boolean existsByCpfEquals(String cpf);
+
     @Override
     default Pessoa salvar(Pessoa pessoa) {
         return save(pessoa);
+    }
+
+    @Override
+    default Boolean isCpfExiste(String cpf) {
+        return existsByCpfEquals(cpf);
     }
 }

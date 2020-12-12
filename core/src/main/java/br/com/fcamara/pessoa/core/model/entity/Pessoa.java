@@ -22,7 +22,7 @@ public class Pessoa {
     private Long id;
 
     @NotEmpty
-    @Max(300)
+    @Size(max = 300)
     @Column(name = "nome", columnDefinition = "varchar(300)", nullable = false)
     private String nome;
 

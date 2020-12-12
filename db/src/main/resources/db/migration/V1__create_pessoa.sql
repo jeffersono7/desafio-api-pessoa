@@ -1,3 +1,5 @@
+CREATE SEQUENCE ${schema}.hibernate_sequence START 1;
+
 CREATE TABLE ${schema}.pessoa (
     id serial not null,
     nome varchar(300) not null,
