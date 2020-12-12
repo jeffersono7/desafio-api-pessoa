@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @Api(value = "Serviço de pessoas", tags = "v1")
 @RequestMapping(
-        value = "/v1/pessoas",
+        value = PessoaRest.PATH,
         consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE
 )

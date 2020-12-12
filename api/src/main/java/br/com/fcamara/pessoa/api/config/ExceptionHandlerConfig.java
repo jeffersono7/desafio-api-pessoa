@@ -15,7 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.io.Serializable;
 
 @ControllerAdvice
-@Log4j
 public class ExceptionHandlerConfig extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({BusinessException.class})

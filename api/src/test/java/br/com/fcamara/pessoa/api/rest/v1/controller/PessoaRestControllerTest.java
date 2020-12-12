@@ -77,6 +77,6 @@ class PessoaRestControllerTest implements ITSupport {
     public void quandoParametrosInvalidosDeveRetornarStatus400() {
         var pessoa = PessoaDTO.builder().build();
 
-        post(PessoaRest.PATH, pessoa, status().is4xxClientError(), String.class);
+        post(PessoaRest.PATH, pessoa, status().isBadRequest(), String.class);
     }
 }
