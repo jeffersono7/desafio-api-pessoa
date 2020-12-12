@@ -24,6 +24,20 @@ public class PessoaRestController implements PessoaRest {
                 .map(pessoaMapper::toEntity)
                 .map(pessoaService::criar)
                 .map(pessoaMapper::toDto)
-        .orElseThrow(InternalServerException.supplier()); // TODO por motivo
+        .orElseThrow(InternalServerException.supplier("Objeto nulo não esperado!"));
+    }
+
+    @Override
+    public PessoaDTO alterar(Long id, PessoaDTO pessoa) {
+        return null;
+    }
+
+    @Override
+    public PessoaDTO obterPor(Long id) {
+        return null;
+    }
+
+    @Override
+    public void deletar(Long id) {
     }
 }

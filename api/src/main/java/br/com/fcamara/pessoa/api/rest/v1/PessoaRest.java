@@ -5,10 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -21,9 +18,24 @@ import javax.validation.Valid;
 public interface PessoaRest {
 
     String PATH = "/v1/pessoas";
+    String ID_PATH_VARIABLE = "id";
+    String ID_PATH = "/{"+ ID_PATH_VARIABLE + "}";
 
     @ApiOperation("Criar pessoa")
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     PessoaDTO criar(@RequestBody @Valid PessoaDTO pessoa);
+
+    @ApiOperation("Alterar pessoa")
+    @PutMapping(ID_PATH)
+    PessoaDTO alterar(@PathVariable(ID_PATH_VARIABLE) Long id, @RequestBody PessoaDTO pessoa);
+
+    @ApiOperation("Obter pessoa pelo id")
+    @GetMapping(ID_PATH)
+    PessoaDTO obterPor(@PathVariable(ID_PATH_VARIABLE) Long id);
+
+    @ApiOperation("Deletar pessoa")
+    @DeleteMapping(ID_PATH)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    void deletar(@PathVariable(ID_PATH_VARIABLE) Long id);
 }

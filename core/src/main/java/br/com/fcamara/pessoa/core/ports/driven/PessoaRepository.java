@@ -6,5 +6,7 @@ public interface PessoaRepository {
 
     Pessoa salvar(Pessoa pessoa);
 
+    Boolean isPessoaExiste(Long id);
+
     Boolean isCpfExiste(String cpf);
 }

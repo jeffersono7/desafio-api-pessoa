@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -18,9 +17,9 @@ import java.time.LocalDate;
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "pessoa")
 @Getter
+@AllArgsConstructor
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class Pessoa {
 
     @Id

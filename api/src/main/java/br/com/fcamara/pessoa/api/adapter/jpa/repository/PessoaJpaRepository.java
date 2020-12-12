@@ -9,10 +9,16 @@ import org.springframework.stereotype.Repository;
 public interface PessoaJpaRepository extends PessoaRepository, JpaRepository<Pessoa, Long> {
 
     Boolean existsByCpfEquals(String cpf);
+    Boolean existsByIdEquals(Long id);
 
     @Override
     default Pessoa salvar(Pessoa pessoa) {
         return save(pessoa);
+    }
+
+    @Override
+    default Boolean isPessoaExiste(Long id) {
+        return existsByIdEquals(id);
     }
 
     @Override
