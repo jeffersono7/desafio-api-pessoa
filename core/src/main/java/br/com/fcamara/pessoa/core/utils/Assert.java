@@ -18,4 +18,10 @@ public class Assert {
             throw new BusinessException(mensagem);
         }
     }
+
+    public static void assertEquals(Object expected, Object atual, Mensagem mensagem) {
+        if (!expected.equals(atual)) {
+            throw new BusinessException(mensagem);
+        }
+    }
 }

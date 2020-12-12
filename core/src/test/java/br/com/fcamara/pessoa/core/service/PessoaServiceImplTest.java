@@ -1,23 +1,16 @@
 package br.com.fcamara.pessoa.core.service;
 
 import br.com.fcamara.pessoa.core.exception.BusinessException;
-import br.com.fcamara.pessoa.core.model.entity.Pessoa;
+import br.com.fcamara.pessoa.core.model.domain.Pessoa;
 import br.com.fcamara.pessoa.core.ports.driven.PessoaRepository;
 import br.com.fcamara.pessoa.core.support.TestSupport;
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.springframework.util.ReflectionUtils;
 
 import java.time.LocalDate;
 

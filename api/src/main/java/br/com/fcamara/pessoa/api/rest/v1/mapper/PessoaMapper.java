@@ -2,7 +2,7 @@ package br.com.fcamara.pessoa.api.rest.v1.mapper;
 
 import br.com.fcamara.pessoa.api.rest.v1.dto.PessoaDTO;
 import br.com.fcamara.pessoa.api.utils.MapperConstant;
-import br.com.fcamara.pessoa.core.model.entity.Pessoa;
+import br.com.fcamara.pessoa.core.model.domain.Pessoa;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

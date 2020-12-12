@@ -1,4 +1,4 @@
-package br.com.fcamara.pessoa.core.model.entity;
+package br.com.fcamara.pessoa.core.model.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
