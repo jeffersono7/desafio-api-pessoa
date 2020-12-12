@@ -16,7 +16,7 @@ public class PessoaServiceImpl implements PessoaService {
     public Pessoa criar(Pessoa pessoa) {
         var existeCpfCadastrado = pessoaRepository.isCpfExiste(pessoa.getCpf());
 
-        Assert.assertFalse(existeCpfCadastrado, Mensagem.CPF_DUPLICADO);
+        Assert.assertFalse(existeCpfCadastrado, Mensagem.CPF_JA_CADASTRADO);
 
         return pessoaRepository.salvar(pessoa);
     }

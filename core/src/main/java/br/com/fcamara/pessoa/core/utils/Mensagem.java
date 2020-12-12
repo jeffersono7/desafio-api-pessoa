@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum Mensagem {
-    CPF_DUPLICADO("CPF já cadastrado!");
+    CPF_JA_CADASTRADO("CPF já cadastrado!");
 
     private String descricao;
 }
