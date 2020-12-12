@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pessoa implements Serializable {
+public class Pessoa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

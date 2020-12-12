@@ -18,8 +18,8 @@
     <description>API pessoa</description>
 
     <modules>
-        <module>api</module>
         <module>core</module>
+        <module>api</module>
         <module>db</module>
     </modules>
 
@@ -142,17 +142,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.4.0</version>
-                <configuration>
-                    <mainClass>br.com.fcamara.pessoa.api.PessoaApplication</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
