@@ -1,6 +1,7 @@
 spring:
   application:
     name: pessoa
+    version: "@project.version@"
   datasource:
     url: "@flyway.url@"
     username: "@flyway.user@"
