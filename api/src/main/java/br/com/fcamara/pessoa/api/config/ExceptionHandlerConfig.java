@@ -1,8 +1,11 @@
 package br.com.fcamara.pessoa.api.config;
 
 import br.com.fcamara.pessoa.core.exception.BusinessException;
+import br.com.fcamara.pessoa.core.exception.InternalServerException;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.log4j.Log4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,13 +15,28 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.io.Serializable;
 
 @ControllerAdvice
+@Log4j
 public class ExceptionHandlerConfig extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({BusinessException.class})
-    protected ResponseEntity<Object> handleBusinessException(BusinessException ex, WebRequest request) {
+    protected ResponseEntity<Message> handleBusinessException(BusinessException ex, WebRequest request) {
         return ResponseEntity
                 .badRequest()
                 .body(buildMessage(ex));
+    }
+
+    @ExceptionHandler({InternalServerException.class})
+    protected ResponseEntity<Message> handleInternalServerException(InternalServerException ex, WebRequest request) {
+        logger.error(ex);
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(
+                        Message
+                                .builder()
+                                .message("Houve um erro ao processar requisição!")
+                                .build()
+                );
     }
 
     private Message buildMessage(BusinessException ex) {
