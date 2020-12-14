@@ -82,9 +82,10 @@ class PessoaRestControllerTest implements ITSupport {
         post(PessoaRest.PATH, pessoa, status().isBadRequest(), String.class);
     }
 
-//    alterar pessoa
 
+    @Test
+    @SneakyThrows
     public void quandoParametrosValidosDeveAlterarPessoa() {
-        fail();
+
     }
 }
