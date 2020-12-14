@@ -39,3 +39,10 @@ $ mvn clean install
 $ cd api
 $ mvn spring-boot:run
 ```
+
+Caso desejar usar IDE para subir o projeto, deve:
+
+- Usar o JDK 11
+- Executar clean e install do maven
+- Ter instalado plugin do lombok
+- Observar que a classe principal se encontra no módulo api do projeto
