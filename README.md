@@ -49,5 +49,5 @@ Caso desejar usar IDE para subir o projeto, deve:
 
 ### Informações adicionais
 
-Swagger disponível no path: /api/swagger-ui.html
-Health check: /api/actuator/health
+- Swagger disponível no path: /api/swagger-ui.html
+- Health check: /api/actuator/health
