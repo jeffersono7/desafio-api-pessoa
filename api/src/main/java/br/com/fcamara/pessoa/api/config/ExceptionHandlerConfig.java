@@ -2,6 +2,7 @@ package br.com.fcamara.pessoa.api.config;
 
 import br.com.fcamara.pessoa.core.exception.BusinessException;
 import br.com.fcamara.pessoa.core.exception.InternalServerException;
+import br.com.fcamara.pessoa.core.exception.NotFoundException;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.log4j.Log4j;
@@ -24,6 +25,13 @@ public class ExceptionHandlerConfig extends ResponseEntityExceptionHandler {
                 .body(buildMessage(ex));
     }
 
+    @ExceptionHandler({NotFoundException.class})
+    protected ResponseEntity<Message> handleNotFoundException(NotFoundException ex, WebRequest request) {
+        return ResponseEntity
+                .notFound()
+                .build();
+    }
+
     @ExceptionHandler({InternalServerException.class})
     protected ResponseEntity<Message> handleInternalServerException(InternalServerException ex, WebRequest request) {
         logger.error(ex);
@@ -39,6 +47,13 @@ public class ExceptionHandlerConfig extends ResponseEntityExceptionHandler {
     }
 
     private Message buildMessage(BusinessException ex) {
+        return Message
+                .builder()
+                .message(ex.getMensagem().getDescricao())
+                .build();
+    }
+
+    private Message buildMessage(NotFoundException ex) {
         return Message
                 .builder()
                 .message(ex.getMensagem().getDescricao())
