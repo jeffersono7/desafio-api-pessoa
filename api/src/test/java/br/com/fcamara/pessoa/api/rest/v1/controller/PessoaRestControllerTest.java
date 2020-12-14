@@ -123,11 +123,13 @@ class PessoaRestControllerTest implements ITSupport {
 
         var pessoaSalva = post(PessoaRest.PATH, pessoa, status().isCreated(), PessoaDTO.class);
 
+        var idPessoa = pessoaSalva.getId();
+        var pathPessoa = PessoaRest.PATH + "/" + idPessoa.toString();
         pessoaSalva.setId(pessoaSalva.getId() + 1);
 
-        var pathPessoa = PessoaRest.PATH + "/" + pessoaSalva.getId().toString();
-
         put(pathPessoa, pessoaSalva, status().isBadRequest(), String.class);
+
+        pessoaRepository.deletar(idPessoa);
     }
 
     //    method obterPor
@@ -161,6 +163,8 @@ class PessoaRestControllerTest implements ITSupport {
         assertEquals(pessoaSalva.getNomeMae(), pessoaRecuperada.getNomeMae());
         assertEquals(pessoaSalva.getNomePai(), pessoaRecuperada.getNomePai());
         assertEquals(pessoaSalva.getPaisNascimento(), pessoaRecuperada.getPaisNascimento());
+
+        pessoaRepository.deletar(pessoaRecuperada.getId());
     }
 
     @Test
