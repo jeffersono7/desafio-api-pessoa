@@ -1,5 +1,6 @@
 package br.com.fcamara.pessoa.api.rest.v1.controller;
 
+import br.com.fcamara.pessoa.api.config.aspect.LoggerRest;
 import br.com.fcamara.pessoa.api.rest.v1.PessoaRest;
 import br.com.fcamara.pessoa.api.rest.v1.dto.PessoaDTO;
 import br.com.fcamara.pessoa.api.rest.v1.mapper.PessoaMapper;
@@ -19,6 +20,7 @@ public class PessoaRestController implements PessoaRest {
     private final PessoaMapper pessoaMapper;
 
     @Override
+    @LoggerRest
     public PessoaDTO criar(@Valid PessoaDTO pessoa) {
         return Optional.of(pessoa)
                 .map(pessoaMapper::toEntity)
@@ -28,6 +30,7 @@ public class PessoaRestController implements PessoaRest {
     }
 
     @Override
+    @LoggerRest
     public PessoaDTO alterar(Long id, PessoaDTO pessoa) {
         return Optional.of(pessoa)
                 .map(pessoaMapper::toEntity)
@@ -37,6 +40,7 @@ public class PessoaRestController implements PessoaRest {
     }
 
     @Override
+    @LoggerRest
     public PessoaDTO obterPor(Long id) {
         return Optional.of(id)
                 .map(pessoaService::obterPor)
@@ -45,11 +49,13 @@ public class PessoaRestController implements PessoaRest {
     }
 
     @Override
+    @LoggerRest
     public void deletar(Long id) {
         pessoaService.deletar(id);
     }
 
     @Override
+    @LoggerRest
     public Iterable<PessoaDTO> filtrar(String query) {
         return Optional.of(pessoaService.search(query))
                 .map(pessoaMapper::toDto)
