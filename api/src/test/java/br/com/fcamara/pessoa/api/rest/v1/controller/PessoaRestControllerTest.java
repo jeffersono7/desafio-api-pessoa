@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.experimental.results.ResultMatchers;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -43,6 +44,7 @@ class PessoaRestControllerTest implements ITSupport {
     @Autowired
     private ObjectMapper objectMapper;
 
+//    criar pessoa
     @Test
     @SneakyThrows
     void quandoParametrosValidosDeveCriarNovaPessoa() {
@@ -78,5 +80,11 @@ class PessoaRestControllerTest implements ITSupport {
         var pessoa = PessoaDTO.builder().build();
 
         post(PessoaRest.PATH, pessoa, status().isBadRequest(), String.class);
+    }
+
+//    alterar pessoa
+
+    public void quandoParametrosValidosDeveAlterarPessoa() {
+        fail();
     }
 }
