@@ -1,8 +1,10 @@
 package br.com.fcamara.pessoa.api.rest.v1.controller;
 
+import br.com.fcamara.pessoa.api.adapter.jpa.repository.PessoaJpaRepository;
 import br.com.fcamara.pessoa.api.rest.v1.PessoaRest;
 import br.com.fcamara.pessoa.api.rest.v1.dto.PessoaDTO;
 import br.com.fcamara.pessoa.api.support.ITSupport;
+import br.com.fcamara.pessoa.core.ports.driven.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -15,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -44,10 +47,13 @@ class PessoaRestControllerTest implements ITSupport {
     @Autowired
     private ObjectMapper objectMapper;
 
-//    criar pessoa
+    @Autowired
+    PessoaRepository pessoaRepository;
+
+    //    criar pessoa
     @Test
     @SneakyThrows
-    void quandoParametrosValidosDeveCriarNovaPessoa() {
+    public void quandoParametrosValidosDeveCriarNovaPessoa() {
         var pessoa = PessoaDTO.builder()
                 .cidadeNascimento("Brasilia")
                 .cpf(CPF_GERADO)
@@ -72,11 +78,13 @@ class PessoaRestControllerTest implements ITSupport {
         assertEquals(pessoa.getNomeMae(), pessoaSalva.getNomeMae());
         assertEquals(pessoa.getNomePai(), pessoaSalva.getNomePai());
         assertEquals(pessoa.getPaisNascimento(), pessoaSalva.getPaisNascimento());
+
+        pessoaRepository.deletar(pessoaSalva.getId());
     }
 
     @Test
     @SneakyThrows
-    public void quandoParametrosInvalidosDeveRetornarStatus400() {
+    public void quandoTentarCriarPessoaComParametrosInvalidosDeveRetornarStatus400() {
         var pessoa = PessoaDTO.builder().build();
 
         post(PessoaRest.PATH, pessoa, status().isBadRequest(), String.class);
@@ -86,6 +94,31 @@ class PessoaRestControllerTest implements ITSupport {
     @Test
     @SneakyThrows
     public void quandoParametrosValidosDeveAlterarPessoa() {
+        var pessoa = PessoaDTO.builder()
+                .cidadeNascimento("Brasilia")
+                .cpf(CPF_GERADO)
+                .dataNascimento(LocalDate.of(1995, 2, 20))
+                .email("spring@teste.com.br")
+                .estadoNascimento("DF")
+                .nome("testador")
+                .nomeMae("mae do testador")
+                .nomePai("pai do testador")
+                .paisNascimento("Brasil")
+                .build();
 
+        var pessoaSalva = post(PessoaRest.PATH, pessoa, status().isCreated(), PessoaDTO.class);
+
+        pessoaSalva.setEmail("outro-email@teste.com.br");
+        pessoaSalva.setEstadoNascimento("SP");
+
+        var pathPessoa = PessoaRest.PATH + "/" + pessoaSalva.getId().toString();
+
+        var pessoaAlterada = put(pathPessoa, pessoaSalva, status().isOk(), PessoaDTO.class);
+
+        assertEquals(pessoaSalva.getId(), pessoaAlterada.getId());
+        assertEquals(pessoaSalva.getEmail(), pessoaAlterada.getEmail());
+        assertEquals(pessoaSalva.getEstadoNascimento(), pessoaAlterada.getEstadoNascimento());
+
+        pessoaRepository.deletar(pessoaAlterada.getId());
     }
 }

@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -83,6 +82,7 @@ class PessoaServiceImplTest extends TestSupport {
 
         when(pessoaRepository.isPessoaExiste(pessoa.getId())).thenReturn(Boolean.TRUE);
         when(pessoaRepository.salvar(pessoa)).thenReturn(pessoa);
+        when(pessoaRepository.obterPorId(pessoa.getId())).thenReturn(Optional.of(pessoa));
 
         var result = pessoaService.alterar(pessoa.getId(), pessoa);
 
@@ -172,7 +172,7 @@ class PessoaServiceImplTest extends TestSupport {
     }
 
     private Pessoa mockPessoaSalva(Pessoa pessoa) {
-        ReflectionTestUtils.setField(pessoa, "id", Long.valueOf(1));
+        pessoa.setId(Long.valueOf(1));
         return pessoa;
     }
 
