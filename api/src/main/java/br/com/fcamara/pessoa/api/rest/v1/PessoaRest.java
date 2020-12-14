@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,4 +39,8 @@ public interface PessoaRest {
     @DeleteMapping(ID_PATH)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deletar(@PathVariable(ID_PATH_VARIABLE) Long id);
+
+    @ApiOperation("Filtrar pessoas")
+    @GetMapping
+    Iterable<PessoaDTO> filtrar(@RequestParam("search") @Nullable String query);
 }

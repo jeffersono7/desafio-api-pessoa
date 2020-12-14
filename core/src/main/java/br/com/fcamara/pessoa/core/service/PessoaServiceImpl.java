@@ -2,16 +2,20 @@ package br.com.fcamara.pessoa.core.service;
 
 import br.com.fcamara.pessoa.core.exception.NotFoundException;
 import br.com.fcamara.pessoa.core.model.domain.Pessoa;
+import br.com.fcamara.pessoa.core.model.predicate.PessoaPredicatesBuilder;
 import br.com.fcamara.pessoa.core.ports.driven.PessoaRepository;
 import br.com.fcamara.pessoa.core.ports.driver.PessoaService;
 import br.com.fcamara.pessoa.core.utils.Assert;
 import br.com.fcamara.pessoa.core.utils.Mensagem;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Transactional(readOnly = true)
 @Service
@@ -56,6 +60,22 @@ public class PessoaServiceImpl implements PessoaService {
         assertThatPessoaExiste(id);
 
         pessoaRepository.deletar(id);
+    }
+
+    @Override
+    public Iterable<Pessoa> search(String query) {
+        var predicatesBuilder = new PessoaPredicatesBuilder();
+
+        if (query != null) {
+            Pattern pattern = Pattern.compile("(\\w+?)(:|<|>)(\\w+?),");
+            Matcher matcher = pattern.matcher(query + ",");
+
+            while (matcher.find()) {
+                predicatesBuilder.with(matcher.group(1), matcher.group(2), matcher.group(3));
+            }
+        }
+        BooleanExpression exp = predicatesBuilder.build();
+        return pessoaRepository.procurarTodos(exp);
     }
 
     private void assertThatPessoaExiste(Long id) {

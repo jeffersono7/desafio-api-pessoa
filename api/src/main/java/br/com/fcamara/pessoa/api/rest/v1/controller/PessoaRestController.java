@@ -48,4 +48,11 @@ public class PessoaRestController implements PessoaRest {
     public void deletar(Long id) {
         pessoaService.deletar(id);
     }
+
+    @Override
+    public Iterable<PessoaDTO> filtrar(String query) {
+        return Optional.of(pessoaService.search(query))
+                .map(pessoaMapper::toDto)
+                .orElseThrow(InternalServerException.supplier("Objeto nulo não esperado!"));
+    }
 }

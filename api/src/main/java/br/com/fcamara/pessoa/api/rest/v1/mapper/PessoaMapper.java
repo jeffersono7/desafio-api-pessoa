@@ -13,4 +13,6 @@ public interface PessoaMapper {
     @Mapping(target = "updatedAt", ignore = true)
     Pessoa toEntity(PessoaDTO pessoa);
     PessoaDTO toDto(Pessoa pessoa);
+
+    Iterable<PessoaDTO> toDto(Iterable<Pessoa> pessoas);
 }

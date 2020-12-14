@@ -79,6 +79,15 @@
             <artifactId>springfox-bean-validators</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-apt</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.querydsl</groupId>
+            <artifactId>querydsl-jpa</artifactId>
+        </dependency>
+
         <!-- test-->
         <dependency>
             <groupId>org.hamcrest</groupId>
