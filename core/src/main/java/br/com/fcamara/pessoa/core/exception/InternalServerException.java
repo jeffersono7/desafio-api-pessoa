@@ -16,7 +16,7 @@ public class InternalServerException extends RuntimeException {
         this.reason = reason;
     }
 
-    public static Supplier<InternalServerException> supplier() {
-        return () -> new InternalServerException();
+    public static Supplier<InternalServerException> supplier(String reason) {
+        return () -> new InternalServerException(reason);
     }
 }

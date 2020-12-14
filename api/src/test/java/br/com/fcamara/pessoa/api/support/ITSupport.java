@@ -2,6 +2,7 @@ package br.com.fcamara.pessoa.api.support;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultMatcher;
@@ -14,9 +15,31 @@ public interface ITSupport {
 
     ObjectMapper getObjectMapper();
 
-    @SneakyThrows
     default <T> T post(String path, Object content, ResultMatcher resultMatcher, Class<T> clazzResponse) {
-        var request = MockMvcRequestBuilders.post(path)
+        return request(path, HttpMethod.POST, content, resultMatcher, clazzResponse);
+    }
+
+    default <T> T put(String path, Object content, ResultMatcher resultMatcher, Class<T> clazzResponse) {
+        return request(path, HttpMethod.PUT, content, resultMatcher, clazzResponse);
+    }
+
+    @SneakyThrows
+    default void delete(String path, ResultMatcher resultMatcher) {
+        var request = MockMvcRequestBuilders.delete(path)
+                .contentType(MediaType.APPLICATION_JSON_VALUE);
+
+        getMockMvc()
+                .perform(request)
+                .andExpect(resultMatcher);
+    }
+
+    default <T> T get(String path, ResultMatcher resultMatcher, Class<T> clazzResponse) {
+        return request(path, HttpMethod.GET, null, resultMatcher, clazzResponse);
+    }
+
+    @SneakyThrows
+    default <T> T request(String path, HttpMethod method, Object content, ResultMatcher resultMatcher, Class<T> clazzResponse) {
+        var request = MockMvcRequestBuilders.request(method, path)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE);
         if (content != null) {
