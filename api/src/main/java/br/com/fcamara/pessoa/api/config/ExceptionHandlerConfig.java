@@ -53,13 +53,6 @@ public class ExceptionHandlerConfig extends ResponseEntityExceptionHandler {
                 .build();
     }
 
-    private Message buildMessage(NotFoundException ex) {
-        return Message
-                .builder()
-                .message(ex.getMensagem().getDescricao())
-                .build();
-    }
-
     @Getter
     @Builder
     public static class Message implements Serializable {
