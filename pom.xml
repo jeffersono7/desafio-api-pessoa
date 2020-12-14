@@ -127,6 +127,18 @@
                 <version>${swagger.version}</version>
             </dependency>
 
+<!--            querydsl-->
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-apt</artifactId>
+                <version>4.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa</artifactId>
+                <version>4.4.0</version>
+            </dependency>
+
             <!-- test -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

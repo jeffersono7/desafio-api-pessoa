@@ -16,4 +16,6 @@ public interface PessoaService {
     Pessoa obterPor(@NotNull Long id);
 
     void deletar(@NotNull Long id);
+
+    Iterable<Pessoa> search(String query);
 }
