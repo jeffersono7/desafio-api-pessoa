@@ -46,3 +46,8 @@ Caso desejar usar IDE para subir o projeto, deve:
 - Executar clean e install do maven
 - Ter instalado plugin do lombok
 - Observar que a classe principal se encontra no módulo api do projeto
+
+### Informações adicionais
+
+Swagger disponível no path: /api/swagger-ui.html
+Health check: /api/actuator/health
